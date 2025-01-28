@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LGSD</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="">
+    <link rel="icon" href="favicon.ico">
 </head>
 <body>
     <!-- Navigation bar -->
@@ -17,31 +17,28 @@
     </div>
 
     <!-- Header -->
-    <h1>LG&#128169D</h1>
+    <h1>LG&#128169;D</h1>
     <p>Welcome to LGSD (Let's Get &#128169; Done!), the ultimate web app for organizing your tasks. Easily add your daily to-do items and accomplish them with ease!</p>
-    
     
     <!-- Task input section -->
     <h2>TODO List</h2>
     <input type="text" id="new-task" placeholder="Enter a task..." aria-label="New task input">
     <p>Add Reminders</p>
     <input type="datetime-local" id="reminder-time" placeholder="Set a reminder">
-    <p>If a task needs a <stong>reminder</stong>, use this tool. If a reminder is not needed, simply submit the task without it!</p>
+    <p>If a task needs a <strong>reminder</strong>, use this tool. If a reminder is not needed, simply submit the task without it!</p>
     <br />
     <button id="add-task" aria-label="Add new task">Add</button>
     <ul id="task-list">
-        <!--INPUT TASKS-->
-        <h2>LET'S GET IT DONE!</h2>
-           
-     </ul>
-   
-    <!-- JavaScript -->
-    <script src="script.js"></script>
+        <!-- Task items will be dynamically inserted here -->
+    </ul>
 
+    <!-- Disclaimer Section -->
     <div class="disclaimer">
         <h3>Disclaimer!</h3>
         <p>Do not <b>refresh the page!</b> This will make your tasks go away, not in a good way.</p>
     </div>
-    
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
