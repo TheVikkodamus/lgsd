@@ -68,7 +68,7 @@ input[type="text"] {
 
 button#add-task {
   display: block;
-  background-color: #ff9901;
+  background-color: #FF8300;
   color: white;
   font-size: 1rem;
   padding: 10px 15px;
