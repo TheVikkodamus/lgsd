@@ -1,33 +1,46 @@
 const taskInput = document.getElementById("new-task");
+const reminderInput = document.getElementById("reminder-time");
 const addTaskButton = document.getElementById("add-task");
 const taskList = document.getElementById("task-list");
 
-// Add a new task to the list
+// Add a new task with a reminder
 addTaskButton.addEventListener("click", () => {
   const taskText = taskInput.value;
+  const reminderTime = new Date(reminderInput.value); // Get the reminder time
+
   if (taskText) {
     const newTask = document.createElement("li");
 
-    // Create a span for the task text
+    // Task text
     const taskSpan = document.createElement("span");
     taskSpan.textContent = taskText;
 
-    // Create a delete button
+    // Delete button
     const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Completed";
+    deleteButton.textContent = "Delete";
     deleteButton.className = "delete-btn";
 
-    // Append the task text and delete button to the task
+    // Append task and delete button
     newTask.appendChild(taskSpan);
     newTask.appendChild(deleteButton);
     taskList.appendChild(newTask);
 
-    // Clear the input field
+    // Clear input fields
     taskInput.value = "";
+    reminderInput.value = "";
+
+    // If a reminder time is set, schedule a notification
+    if (reminderTime && reminderTime > new Date()) {
+      const timeDifference = reminderTime.getTime() - new Date().getTime();
+
+      setTimeout(() => {
+        alert(`Reminder: ${taskText}`);
+      }, timeDifference);
+    }
   }
 });
 
-// Delete a task when its delete button is clicked
+// Delete a task
 taskList.addEventListener("click", (event) => {
   if (event.target.classList.contains("delete-btn")) {
     const listItem = event.target.parentNode; // Get the parent <li>
