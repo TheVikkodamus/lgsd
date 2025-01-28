@@ -160,6 +160,7 @@ ul#task-list li button.delete-btn:hover {
     margin-top: 10px;
     align-self: flex-end;
   }
+  
   /* Disclaimer */
   .disclaimer {
   width: 100%;
@@ -169,4 +170,5 @@ ul#task-list li button.delete-btn:hover {
   justify-content: space-around;
   padding: 10px 0;
   }
+  
 }
