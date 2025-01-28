@@ -135,6 +135,16 @@ ul#task-list li button.delete-btn:hover {
   background-color: #ff504d;
 }
 
+/* Disclaimer */
+  .disclaimer {
+  width: 100%;
+  background-color: #FF8400;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  }
+
 /* Mobile-Friendly Adjustments */
 @media (max-width: 768px) {
   h1 {
@@ -159,16 +169,6 @@ ul#task-list li button.delete-btn:hover {
   ul#task-list li button.delete-btn {
     margin-top: 10px;
     align-self: flex-end;
-  }
-  
-  /* Disclaimer */
-  .disclaimer {
-  width: 100%;
-  background-color: #FF8400;
-  overflow: hidden;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
   }
   
 }
