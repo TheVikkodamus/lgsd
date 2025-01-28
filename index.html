@@ -17,16 +17,15 @@
     </div>
 
     <!-- Header -->
-    <div class="hero">
     <h1>LG&#128169D</h1>
     <p>Welcome to LGSD (Let's Get &#128169; Done!), the ultimate web app for organizing your tasks. Easily add your daily to-do items and accomplish them with ease!</p>
-    </div>
+    
     
     <!-- Task input section -->
     <h2>TODO List</h2>
     <input type="text" id="new-task" placeholder="Enter a task..." aria-label="New task input">
     <input type="datetime-local" id="reminder-time" placeholder="Set a reminder">
-    <p>If a task needs a reminder, use this tool. If not, simply submit the task without it!</p>
+    <p>If a task needs a <stong>reminder</stong>, use this tool. If a reminder is not needed, simply submit the task without it!</p>
     <br />
     <button id="add-task" aria-label="Add new task">Add</button>
     <ul id="task-list">
@@ -37,5 +36,10 @@
    
     <!-- JavaScript -->
     <script src="script.js"></script>
+
+    <div class="disclaimer">
+        <h3>Disclaimer!</h3>
+        <p>Do not <b>refresh the page!</b> This will make your tasks go away, not in a good way. </p>
+    </div>
 </body>
 </html>
