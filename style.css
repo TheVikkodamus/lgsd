@@ -137,13 +137,16 @@ ul#task-list li button.delete-btn:hover {
 
 /* Disclaimer */
   .disclaimer {
-  width: 100%;
-  background-color: #FF8400;
-  overflow: hidden;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  }
+  background-color: #FF8400; /* Orange background */
+  color: white; /* Text color */
+  padding: 20px; /* Inner spacing */
+  margin: 20px auto; /* Centered and spaced */
+  max-width: 600px; /* Maximum width */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  text-align: center; /* Center text */
+  font-size: 1rem; /* Font size */
+}
 
 /* Mobile-Friendly Adjustments */
 @media (max-width: 768px) {
