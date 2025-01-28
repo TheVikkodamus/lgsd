@@ -21,7 +21,7 @@ addTaskButton.addEventListener("click", () => {
 
     // Delete button
     const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
+    deleteButton.textContent = "Completed";
     deleteButton.className = "delete-btn";
 
     // Append task and delete button
