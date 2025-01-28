@@ -1,4 +1,7 @@
 /* General Styles */
+.hero {
+  color:brown
+}
 body {
   font-family: Roboto, sans-serif;
   background-color: #f4f4f9;
