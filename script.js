@@ -1,3 +1,7 @@
+if (Notification.permission !== "granted") {
+  Notification.requestPermission();
+}
+
 const taskInput = document.getElementById("new-task");
 const reminderInput = document.getElementById("reminder-time");
 const addTaskButton = document.getElementById("add-task");
