@@ -136,16 +136,26 @@ ul#task-list li button.delete-btn:hover {
 }
 
 /* Disclaimer */
-  .disclaimer {
+.disclaimer {
   background-color: #FF8400; /* Orange background */
-  color: white; /* Text color */
-  padding: 20px; /* Inner spacing */
-  margin: 20px auto; /* Centered and spaced */
-  max-width: 600px; /* Maximum width */
+  color: white; /* White text */
+  padding: 20px; /* Space inside the box */
+  margin: 20px auto; /* Centered with margin from other elements */
+  max-width: 600px; /* Restrict maximum width for readability */
   border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  text-align: center; /* Center text */
-  font-size: 1rem; /* Font size */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  text-align: center; /* Center-align the text */
+  font-size: 1rem; /* Text size */
+}
+
+.disclaimer h3 {
+  font-size: 1.5rem; /* Larger font size for the title */
+  margin-bottom: 10px; /* Add spacing below the title */
+}
+
+.disclaimer p {
+  font-size: 1rem;
+  line-height: 1.5; /* Increase line spacing for readability */
 }
 
 /* Mobile-Friendly Adjustments */
