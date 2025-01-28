@@ -163,7 +163,7 @@ ul#task-list li button.delete-btn:hover {
   /* Disclaimer */
   .disclaimer {
   width: 100%;
-  background-color: #FFFFFF;
+  background-color: #FF8400;
   overflow: hidden;
   display: flex;
   justify-content: space-around;
