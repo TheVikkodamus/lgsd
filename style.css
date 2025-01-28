@@ -154,4 +154,13 @@ ul#task-list li button.delete-btn:hover {
     margin-top: 10px;
     align-self: flex-end;
   }
+  /* Disclaimer */
+  .disclaimer {
+  width: 100%;
+  background-color: #FFFFFF;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  }
 }
