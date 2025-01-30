@@ -98,7 +98,7 @@ button#add-task:hover {
 }
 
 /* task div */
-.taskList {
+.taskbox {
   background-colo: #E4C045;
   padding: 0;
   margin: 0;
