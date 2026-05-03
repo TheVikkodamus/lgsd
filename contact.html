@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LG💩D — Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0f0f0f;
+      --surface: #1a1a1a;
+      --border:  #2e2e2e;
+      --accent:  #d4ff3e;
+      --accent2: #ff6b35;
+      --muted:   #555;
+      --text:    #f0f0f0;
+      --subtext: #888;
+      --radius:  10px;
+      --shadow:  0 4px 24px rgba(0,0,0,.5);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: .4;
+    }
+
+    /* ── Nav ─────────────────────────────────────────────── */
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(15,15,15,.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    nav .brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin-right: auto;
+      text-decoration: none;
+    }
+    nav a {
+      color: var(--subtext);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: color .2s, background .2s;
+    }
+    nav a:hover { color: var(--text); background: var(--border); }
+    nav a.active { color: var(--bg); background: var(--accent); font-weight: 600; }
+
+    /* ── Header ──────────────────────────────────────────── */
+    header {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 64px 24px 48px;
+    }
+    header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(60px, 12vw, 120px);
+      line-height: 1;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, var(--accent) 0%, #aaff00 50%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p {
+      max-width: 440px;
+      margin: 16px auto 0;
+      color: var(--subtext);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── Layout ──────────────────────────────────────────── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 640px) {
+      main { grid-template-columns: 1fr; }
+    }
+
+    /* ── Card ────────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+    .card h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    /* ── Form fields ─────────────────────────────────────── */
+    .field {
+      margin-bottom: 16px;
+    }
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--subtext);
+      margin-bottom: 6px;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212,255,62,.12);
+    }
+    .field textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.6;
+    }
+    .field select option { background: #1a1a1a; }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Character counter */
+    .field-footer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 5px;
+    }
+    .char-count {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .char-count.warn { color: var(--accent2); }
+
+    /* ── Submit ──────────────────────────────────────────── */
+    .btn-submit {
+      width: 100%;
+      padding: 13px;
+      background: var(--accent);
+      color: #0f0f0f;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 19px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: transform .15s, background .2s, box-shadow .2s;
+      margin-top: 4px;
+    }
+    .btn-submit:hover {
+      background: #c5ef30;
+      box-shadow: 0 0 24px rgba(212,255,62,.3);
+      transform: translateY(-1px);
+    }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* ── Success state ───────────────────────────────────── */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 32px 16px;
+      animation: fadeIn .4s ease;
+    }
+    .success-state.show { display: block; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    .success-state .big-emoji { font-size: 56px; display: block; margin-bottom: 14px; }
+    .success-state h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .success-state p { color: var(--subtext); font-size: 14px; line-height: 1.5; }
+    .btn-reset {
+      margin-top: 20px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--subtext);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      padding: 8px 18px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-reset:hover { color: var(--text); border-color: var(--text); }
+
+    /* ── Sidebar ─────────────────────────────────────────── */
+    .sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color .2s;
+    }
+    .contact-item:hover { border-color: var(--accent); }
+    .contact-icon {
+      width: 38px;
+      height: 38px;
+      background: rgba(212,255,62,.08);
+      border: 1px solid rgba(212,255,62,.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .contact-body p:first-child {
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+    .contact-body p:last-child {
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    /* ── Response time ───────────────────────────────────── */
+    .response-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(212,255,62,.06);
+      border: 1px solid rgba(212,255,62,.15);
+      border-radius: 99px;
+      padding: 6px 14px;
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .response-pill::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: .3; }
+    }
+
+    .sidebar-note {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .sidebar-note p {
+      font-size: 13px;
+      color: var(--subtext);
+      line-height: 1.6;
+    }
+    .sidebar-note p + p { margin-top: 10px; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+    @media (max-width: 480px) {
+      .field-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="brand" href="index.html">LG💩D</a>
+    <a href="index.html">Home</a>
+    <a href="donate.html">Donate</a>
+    <a href="contact.html" class="active">Contact</a>
+    <a href="#project">Projects</a>
+  </nav>
+
+  <header>
+    <h1>Get in Touch</h1>
+    <p>Bug report, feature idea, or just want to say hi? We're all ears — and we don't bite.</p>
+  </header>
+
+  <main>
+
+    <!-- Contact form -->
+    <div class="card">
+      <div id="contact-form">
+        <h2>Send a Message</h2>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" placeholder="Jane">
+          </div>
+          <div class="field">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" placeholder="Doe">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="jane@example.com">
+        </div>
+
+        <div class="field">
+          <label for="subject">Subject</label>
+          <select id="subject">
+            <option value="">— Select a topic —</option>
+            <option value="bug">🐛 Bug Report</option>
+            <option value="feature">💡 Feature Request</option>
+            <option value="feedback">💬 General Feedback</option>
+            <option value="business">💼 Business Inquiry</option>
+            <option value="other">📌 Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell us what's on your mind..."></textarea>
+          <div class="field-footer">
+            <span class="char-count" id="char-count">0 / 1000</span>
+          </div>
+        </div>
+
+        <button class="btn-submit" id="submit-btn">Send Message →</button>
+      </div>
+
+      <!-- Success state -->
+      <div class="success-state" id="success-state">
+        <span class="big-emoji">💩</span>
+        <h3>Message Sent!</h3>
+        <p>Thanks for reaching out.<br>We'll get back to you as soon as we can.</p>
+        <button class="btn-reset" id="reset-btn">Send another message</button>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+      <div style="display:flex; justify-content:center;">
+        <span class="response-pill">Usually responds within 24h</span>
+      </div>
+
+      <a class="contact-item" href="mailto:hello@lgsd.app">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-body">
+          <p>Email Us</p>
+          <p>hello@lgsd.app</p>
+        </div>
+      </a>
+
+      <a class="contact-item" href="https://twitter.com/lgsdapp" target="_blank" rel="noopener">
+        <div class="contact-icon">🐦</div>
+        <div class="contact-body">
+          <p>Twitter / X</p>
+          <p>@lgsdapp</p>
+        </div>
+      </a>
+
+      <a class="contact-item" href="https://github.com/lgsdapp" target="_blank" rel="noopener">
+        <div class="contact-icon">💻</div>
+        <div class="contact-body">
+          <p>GitHub</p>
+          <p>Report issues or contribute</p>
+        </div>
+      </a>
+
+      <div class="sidebar-note">
+        <p>🐛 <strong style="color:var(--text)">Found a bug?</strong> Please include your browser and OS in the message — it helps a lot.</p>
+        <p>💡 <strong style="color:var(--text)">Feature ideas</strong> are always welcome. The best ones end up in the app!</p>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <script>
+    const messageBox  = document.getElementById('message');
+    const charCount   = document.getElementById('char-count');
+    const submitBtn   = document.getElementById('submit-btn');
+    const contactForm = document.getElementById('contact-form');
+    const successState = document.getElementById('success-state');
+    const resetBtn    = document.getElementById('reset-btn');
+    const MAX = 1000;
+
+    messageBox.addEventListener('input', () => {
+      const len = messageBox.value.length;
+      charCount.textContent = `${len} / ${MAX}`;
+      charCount.classList.toggle('warn', len > MAX * 0.9);
+      if (len > MAX) messageBox.value = messageBox.value.slice(0, MAX);
+    });
+
+    function validate() {
+      const fname   = document.getElementById('fname').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value;
+      const message = messageBox.value.trim();
+      return fname && email && subject && message;
+    }
+
+    function highlight(el) {
+      el.style.borderColor = '#ff5050';
+      el.style.boxShadow = '0 0 0 3px rgba(255,80,80,.1)';
+      setTimeout(() => { el.style.borderColor = ''; el.style.boxShadow = ''; }, 900);
+    }
+
+    submitBtn.addEventListener('click', () => {
+      const fname   = document.getElementById('fname');
+      const email   = document.getElementById('email');
+      const subject = document.getElementById('subject');
+
+      let ok = true;
+      if (!fname.value.trim())   { highlight(fname);   ok = false; }
+      if (!email.value.trim())   { highlight(email);   ok = false; }
+      if (!subject.value)        { highlight(subject); ok = false; }
+      if (!messageBox.value.trim()) { highlight(messageBox); ok = false; }
+      if (!ok) return;
+
+      // Wire up your form backend here (Formspree, EmailJS, etc.)
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      setTimeout(() => {
+        contactForm.style.display = 'none';
+        successState.classList.add('show');
+      }, 800); // Simulated delay — replace with real fetch()
+    });
+
+    resetBtn.addEventListener('click', () => {
+      successState.classList.remove('show');
+      contactForm.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Message →';
+      document.getElementById('fname').value = '';
+      document.getElementById('lname').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('subject').value = '';
+      messageBox.value = '';
+      charCount.textContent = '0 / 1000';
+    });
+  </script>
+</body>
+</html>
