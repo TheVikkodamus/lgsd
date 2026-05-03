@@ -383,7 +383,7 @@
         <div class="divider">Pay with</div>
 
         <div class="method-grid">
-          <button class="method-btn selected" data-method="https://www.paypal.com/donate/?hosted_button_id=4G6LXCQH5KFL4">
+          <button class="method-btn selected" data-method="paypal">
             <span class="method-icon">🅿️</span> PayPal
           </button>
           <button class="method-btn" data-method="card">
@@ -474,7 +474,7 @@
       });
     });
 
-    donateBtn.addEventListener('click', () => {
+    donateBtn.addEventListener('https://www.paypal.com/donate/?hosted_button_id=4G6LXCQH5KFL4', () => {
       const amt = selectedAmount === 'custom'
         ? parseFloat(customInput.value)
         : selectedAmount;
