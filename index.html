@@ -1,46 +1,730 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LGSD</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LG💩D — Let's Get It Done</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Variables ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0f0f0f;
+      --surface:  #1a1a1a;
+      --border:   #2e2e2e;
+      --accent:   #d4ff3e;
+      --accent2:  #ff6b35;
+      --muted:    #555;
+      --text:     #f0f0f0;
+      --subtext:  #888;
+      --done-bg:  #1c2a0e;
+      --done-text:#6aaa1a;
+      --radius:   10px;
+      --shadow:   0 4px 24px rgba(0,0,0,.5);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* ── Noise texture overlay ─────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: .4;
+    }
+
+    /* ── Top Nav ───────────────────────────────────────── */
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(15,15,15,.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    nav a {
+      color: var(--subtext);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: color .2s, background .2s;
+      letter-spacing: .3px;
+    }
+    nav a:hover { color: var(--text); background: var(--border); }
+    nav a.active { color: var(--bg); background: var(--accent); font-weight: 600; }
+
+    nav .brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin-right: auto;
+    }
+
+    /* ── Hero ──────────────────────────────────────────── */
+    header {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 64px 24px 48px;
+    }
+
+    header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 14vw, 140px);
+      line-height: 1;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, var(--accent) 0%, #aaff00 50%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header p {
+      max-width: 480px;
+      margin: 16px auto 0;
+      color: var(--subtext);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── Main layout ───────────────────────────────────── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ── Input Card ────────────────────────────────────── */
+    .input-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+
+    .input-card h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    input[type="text"],
+    input[type="datetime-local"],
+    select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      width: 100%;
+    }
+
+    input[type="text"]:focus,
+    input[type="datetime-local"]:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212,255,62,.12);
+    }
+
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+      filter: invert(.6);
+      cursor: pointer;
+    }
+
+    .input-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    label.field-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--subtext);
+      margin-bottom: 6px;
+    }
+
+    select option { background: #1a1a1a; }
+
+    /* ── Priority pip ──────────────────────────────────── */
+    .priority-wrap { position: relative; }
+
+    /* ── Add Button ────────────────────────────────────── */
+    .btn-add {
+      width: 100%;
+      padding: 12px;
+      background: var(--accent);
+      color: #0f0f0f;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: transform .15s, background .2s, box-shadow .2s;
+    }
+
+    .btn-add:hover {
+      background: #c5ef30;
+      box-shadow: 0 0 20px rgba(212,255,62,.3);
+      transform: translateY(-1px);
+    }
+    .btn-add:active { transform: translateY(0); }
+
+    /* ── Stats bar ─────────────────────────────────────── */
+    .stats-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: var(--subtext);
+    }
+
+    .stats-bar strong { color: var(--text); }
+
+    .stats-bar .progress-wrap {
+      flex: 1;
+      height: 4px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .stats-bar .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 99px;
+      transition: width .4s ease;
+    }
+
+    /* ── Filter tabs ───────────────────────────────────── */
+    .filter-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .filter-tab {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--subtext);
+      border-radius: 99px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 14px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-tab.active { background: var(--accent); border-color: var(--accent); color: #0f0f0f; font-weight: 600; }
+
+    /* ── Task List ─────────────────────────────────────── */
+    #task-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .task-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: border-color .2s, opacity .3s, transform .3s;
+      animation: slideIn .25s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .task-item:hover { border-color: #3e3e3e; }
+
+    .task-item.done {
+      background: var(--done-bg);
+      border-color: #2a4a0a;
+      opacity: .75;
+    }
+    .task-item.done .task-text { text-decoration: line-through; color: var(--done-text); }
+
+    /* Custom checkbox */
+    .task-check {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+      margin-top: 1px;
+    }
+    .task-check:hover { border-color: var(--accent); }
+    .task-item.done .task-check {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .task-item.done .task-check::after {
+      content: '✓';
+      font-size: 11px;
+      font-weight: 700;
+      color: #0f0f0f;
+    }
+
+    .task-body { flex: 1; min-width: 0; }
+
+    .task-text {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--text);
+      word-break: break-word;
+    }
+
+    .task-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    /* Priority tags */
+    .tag-high   { background: rgba(255,80,80,.15); color: #ff6060; }
+    .tag-medium { background: rgba(255,165,0,.15);  color: #ffaa00; }
+    .tag-low    { background: rgba(100,200,100,.15); color: #64c864; }
+
+    /* Category tags */
+    .tag-cat {
+      background: rgba(212,255,62,.08);
+      color: var(--accent);
+      border: 1px solid rgba(212,255,62,.2);
+    }
+
+    .task-reminder {
+      font-size: 11px;
+      color: var(--subtext);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-delete {
+      flex-shrink: 0;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 6px;
+      font-size: 12px;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-delete:hover { background: rgba(255,80,80,.1); border-color: #ff5050; color: #ff5050; }
+
+    /* ── Empty state ───────────────────────────────────── */
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--muted);
+    }
+    .empty-state .emoji { font-size: 48px; display: block; margin-bottom: 12px; }
+    .empty-state p { font-size: 14px; }
+
+    /* ── Footer / Notification bar ─────────────────────── */
+    .notif-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1e2e00;
+      border: 1px solid rgba(212,255,62,.3);
+      color: var(--accent);
+      border-radius: 99px;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      z-index: 200;
+      transition: transform .3s ease;
+      white-space: nowrap;
+      box-shadow: 0 4px 20px rgba(0,0,0,.4);
+    }
+    .notif-bar.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── Scrollbar ─────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+    /* ── Responsive ────────────────────────────────────── */
+    @media (max-width: 500px) {
+      .input-meta { grid-template-columns: 1fr; }
+      nav .brand { font-size: 18px; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation bar -->
-    <div class="topnav">
-        <a class="active" href="index.html">Home</a>
-        <a href="#donate">Donate</a>
-        <a href="#contact">Contact</a>
-        <a href="#project">Projects</a>
+
+  <!-- Nav -->
+  <nav>
+    <span class="brand">LG💩D</span>
+    <a class="active" href="index.html">Home</a>
+    <a href="#donate">Donate</a>
+    <a href="#contact">Contact</a>
+    <a href="#project">Projects</a>
+  </nav>
+
+  <!-- Hero -->
+  <header>
+    <h1>LG💩D</h1>
+    <p>Let's Get 💩 Done — add your tasks, set reminders, and crush your day.</p>
+  </header>
+
+  <!-- App -->
+  <main>
+
+    <!-- Input card -->
+    <div class="input-card">
+      <h2>Add a Task</h2>
+
+      <div class="input-row">
+        <div style="flex:1">
+          <label class="field-label">Task</label>
+          <input type="text" id="new-task" placeholder="What needs doing?" aria-label="New task input">
+        </div>
+      </div>
+
+      <div class="input-meta">
+        <div>
+          <label class="field-label">Priority</label>
+          <select id="priority">
+            <option value="medium">⚡ Medium</option>
+            <option value="high">🔥 High</option>
+            <option value="low">🌿 Low</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label">Category</label>
+          <select id="category">
+            <option value="">— None —</option>
+            <option value="Work">💼 Work</option>
+            <option value="Personal">🏠 Personal</option>
+            <option value="Health">💪 Health</option>
+            <option value="Finance">💰 Finance</option>
+            <option value="Other">📌 Other</option>
+          </select>
+        </div>
+        <div style="grid-column:1/-1">
+          <label class="field-label">Reminder (optional)</label>
+          <input type="datetime-local" id="reminder-time" aria-label="Reminder time">
+        </div>
+      </div>
+
+      <button class="btn-add" id="add-task">+ Add Task</button>
     </div>
 
-    <!-- Header -->
-    <h1>LG&#128169;D</h1>
-    <p>Welcome to LGSD (Let's Get &#128169; Done!), the ultimate web app for organizing your tasks. Easily add your daily to-do items and accomplish them with ease!</p>
-    
-    <!-- Task input section -->
-    <h2>TODO List</h2>
-    <input type="text" id="new-task" placeholder="Enter a task..." aria-label="New task input">
-    <p><strong>Add Reminders</strong></p>
-    <input type="datetime-local" id="reminder-time" placeholder="Set a reminder">
-    <p>"If a task requires a <strong>reminder</strong>, use this tool. Otherwise, simply submit the task without one!</p>
-    <br />
-    <button id="add-task" aria-label="Add new task">Add</button>
-    <ul id="task-list">
-        <!-- Task items will be dynamically inserted here -->
-    </ul>
-    
-    <div class="taskbox">
-    <!-- JavaScript -->
-    <script src="script.js"></script>
+    <!-- Stats + Filter -->
+    <div class="stats-bar">
+      <span><strong id="stat-remain">0</strong> remaining</span>
+      <div class="progress-wrap">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <span><strong id="stat-done">0</strong> done</span>
     </div>
- 
-    <!-- Disclaimer Section -->
-    <div class="disclaimer">
-        <h3>Disclaimer!</h3>
-        <p>Do not <b>refresh the page!</b></p> <BR> <p>Refreshing will erase your tasks, and they won't come back.</p>
+
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">All</button>
+      <button class="filter-tab" data-filter="active">Active</button>
+      <button class="filter-tab" data-filter="done">Done</button>
     </div>
+
+    <!-- Task list -->
+    <ul id="task-list"></ul>
+
+    <div class="empty-state" id="empty-state" style="display:none">
+      <span class="emoji">💩</span>
+      <p>No tasks here. Add something above!</p>
+    </div>
+
+  </main>
+
+  <!-- Toast notification bar -->
+  <div class="notif-bar" id="notif-bar"></div>
+
+  <script>
+    // ── State ──────────────────────────────────────────────
+    let tasks = JSON.parse(localStorage.getItem('lgsd-tasks') || '[]');
+    let currentFilter = 'all';
+
+    const taskInput     = document.getElementById('new-task');
+    const reminderInput = document.getElementById('reminder-time');
+    const priorityInput = document.getElementById('priority');
+    const categoryInput = document.getElementById('category');
+    const addBtn        = document.getElementById('add-task');
+    const taskListEl    = document.getElementById('task-list');
+    const emptyState    = document.getElementById('empty-state');
+    const progressFill  = document.getElementById('progress-fill');
+    const statRemain    = document.getElementById('stat-remain');
+    const statDone      = document.getElementById('stat-done');
+    const notifBar      = document.getElementById('notif-bar');
+
+    // ── Notifications ──────────────────────────────────────
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
+
+    // ── Toast ──────────────────────────────────────────────
+    function showToast(msg, duration = 2500) {
+      notifBar.textContent = msg;
+      notifBar.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => notifBar.classList.remove('show'), duration);
+    }
+
+    // ── Persistence ────────────────────────────────────────
+    function save() {
+      localStorage.setItem('lgsd-tasks', JSON.stringify(tasks));
+    }
+
+    // ── Render ─────────────────────────────────────────────
+    function render() {
+      taskListEl.innerHTML = '';
+
+      const filtered = tasks.filter(t => {
+        if (currentFilter === 'active') return !t.done;
+        if (currentFilter === 'done')   return  t.done;
+        return true;
+      });
+
+      const done    = tasks.filter(t => t.done).length;
+      const total   = tasks.length;
+      const pct     = total ? Math.round((done / total) * 100) : 0;
+
+      statDone.textContent    = done;
+      statRemain.textContent  = total - done;
+      progressFill.style.width = pct + '%';
+
+      emptyState.style.display = filtered.length === 0 ? 'block' : 'none';
+
+      filtered.forEach(task => {
+        const li = document.createElement('li');
+        li.className = 'task-item' + (task.done ? ' done' : '');
+        li.dataset.id = task.id;
+
+        // Checkbox
+        const check = document.createElement('div');
+        check.className = 'task-check';
+        check.title = task.done ? 'Mark incomplete' : 'Mark complete';
+        check.addEventListener('click', () => toggleDone(task.id));
+
+        // Body
+        const body = document.createElement('div');
+        body.className = 'task-body';
+
+        const text = document.createElement('div');
+        text.className = 'task-text';
+        text.textContent = task.text;
+
+        const meta = document.createElement('div');
+        meta.className = 'task-meta';
+
+        // Priority tag
+        const pTag = document.createElement('span');
+        pTag.className = `tag tag-${task.priority}`;
+        pTag.textContent = { high: '🔥 High', medium: '⚡ Med', low: '🌿 Low' }[task.priority] || task.priority;
+        meta.appendChild(pTag);
+
+        // Category tag
+        if (task.category) {
+          const cTag = document.createElement('span');
+          cTag.className = 'tag tag-cat';
+          cTag.textContent = task.category;
+          meta.appendChild(cTag);
+        }
+
+        // Reminder
+        if (task.reminder) {
+          const rTag = document.createElement('span');
+          rTag.className = 'task-reminder';
+          rTag.textContent = '⏰ ' + new Date(task.reminder).toLocaleString([], { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+          meta.appendChild(rTag);
+        }
+
+        body.appendChild(text);
+        body.appendChild(meta);
+
+        // Delete
+        const del = document.createElement('button');
+        del.className = 'btn-delete';
+        del.textContent = '✕';
+        del.title = 'Delete task';
+        del.addEventListener('click', () => deleteTask(task.id));
+
+        li.appendChild(check);
+        li.appendChild(body);
+        li.appendChild(del);
+        taskListEl.appendChild(li);
+      });
+    }
+
+    // ── Add Task ───────────────────────────────────────────
+    addBtn.addEventListener('click', addTask);
+    taskInput.addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
+
+    function addTask() {
+      const text = taskInput.value.trim();
+      if (!text) {
+        taskInput.focus();
+        taskInput.style.borderColor = '#ff5050';
+        setTimeout(() => taskInput.style.borderColor = '', 800);
+        return;
+      }
+
+      const reminderVal = reminderInput.value;
+      const task = {
+        id:       Date.now(),
+        text,
+        priority: priorityInput.value,
+        category: categoryInput.value,
+        reminder: reminderVal || null,
+        done:     false,
+        createdAt: new Date().toISOString(),
+      };
+
+      tasks.unshift(task);
+      save();
+      render();
+
+      // Schedule reminder
+      if (reminderVal) {
+        const ms = new Date(reminderVal).getTime() - Date.now();
+        if (ms > 0) {
+          setTimeout(() => {
+            if ('Notification' in window && Notification.permission === 'granted') {
+              new Notification('LG💩D Reminder', { body: task.text, icon: 'favicon.ico' });
+            } else {
+              alert(`⏰ Reminder: ${task.text}`);
+            }
+          }, ms);
+          showToast(`⏰ Reminder set for ${new Date(reminderVal).toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' })}`);
+        }
+      } else {
+        showToast('Task added!');
+      }
+
+      // Clear
+      taskInput.value     = '';
+      reminderInput.value = '';
+      priorityInput.value = 'medium';
+      categoryInput.value = '';
+      taskInput.focus();
+    }
+
+    // ── Toggle Done ────────────────────────────────────────
+    function toggleDone(id) {
+      const t = tasks.find(t => t.id === id);
+      if (!t) return;
+      t.done = !t.done;
+      save();
+      render();
+      if (t.done) showToast('💩 Task crushed!');
+    }
+
+    // ── Delete ─────────────────────────────────────────────
+    function deleteTask(id) {
+      tasks = tasks.filter(t => t.id !== id);
+      save();
+      render();
+      showToast('Task removed.');
+    }
+
+    // ── Filter Tabs ────────────────────────────────────────
+    document.querySelectorAll('.filter-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        render();
+      });
+    });
+
+    // ── Init ───────────────────────────────────────────────
+    // Re-schedule any pending reminders from saved tasks
+    tasks.forEach(t => {
+      if (t.reminder && !t.done) {
+        const ms = new Date(t.reminder).getTime() - Date.now();
+        if (ms > 0) {
+          setTimeout(() => {
+            if ('Notification' in window && Notification.permission === 'granted') {
+              new Notification('LG💩D Reminder', { body: t.text });
+            } else {
+              alert(`⏰ Reminder: ${t.text}`);
+            }
+          }, ms);
+        }
+      }
+    });
+
+    render();
+  </script>
 </body>
 </html>
