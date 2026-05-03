@@ -474,7 +474,7 @@
       });
     });
 
-    donateBtn.addEventListener('https://www.paypal.com/donate/?hosted_button_id=4G6LXCQH5KFL4', () => {
+    donateBtn.addEventListener('click', () => {
       const amt = selectedAmount === 'custom'
         ? parseFloat(customInput.value)
         : selectedAmount;
@@ -484,10 +484,9 @@
         setTimeout(() => customRow.style.borderColor = '', 800);
         return;
       }
-      // Replace with real payment integration (PayPal, Stripe, etc.)
-      donateForm.style.display = 'none';
-      thankYou.classList.add('show');
+      window.open('https://www.paypal.com/donate/?hosted_button_id=4G6LXCQH5KFL4', '_blank');
     });
+
 
     updateDonateBtn();
   </script>
